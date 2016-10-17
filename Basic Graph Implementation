@@ -1,49 +1,8 @@
 import java.util.ArrayList;
 
-class Graph{
-	
-	ArrayList<Node> allNodes = new ArrayList<Node>();
-	
-	void createNode(String NodeName){
-		allNodes.add(new Node(NodeName, null));
-	}
-	
-	void addEdge(String startNodeName, String endNodeName){
-		Node startNode = null;
-		for(Node node : allNodes){
-			if(node.nodeName.equalsIgnoreCase(startNodeName)){
-				startNode = node;
-			}if(node.nodeName.equalsIgnoreCase(endNodeName)){
-				if(null != startNode){
-					if(startNode.adjacentNodes == null){
-						startNode.adjacentNodes = new ArrayList<Node>();
-					}
-					startNode.adjacentNodes.add(node);
-				}
-			}
-		}
-	}
-	
-	void printGraph(){
-		System.out.println(allNodes);
-	}
-}
+public class Solution {
 
-class Node {
-	
-	String nodeName;
-	ArrayList<Node> adjacentNodes;
-	
-	Node(String nodeName, ArrayList<Node> adjacentNodes){
-		this.nodeName = nodeName;
-		this.adjacentNodes = adjacentNodes;
-	}
-	
-}
-
-public class CreateGraph {
-
-	public static void main(String args[]){
+	public static void main(String args[]) {
 		Graph g = new Graph();
 		g.createNode("A");
 		g.createNode("B");
@@ -55,5 +14,49 @@ public class CreateGraph {
 		g.addEdge("A", "D");
 
 		g.printGraph();
+
 	}
+
+}
+
+class Graph {
+
+	ArrayList<Node> allNodes = new ArrayList<Node>();
+
+	void createNode(String NodeName) {
+		allNodes.add(new Node(NodeName, null));
+	}
+
+	void addEdge(String startNodeName, String endNodeName) {
+		Node startNode = null;
+		for (Node node : allNodes) {
+			if (node.nodeName.equalsIgnoreCase(startNodeName)) {
+				startNode = node;
+			}
+			if (node.nodeName.equalsIgnoreCase(endNodeName)) {
+				if (null != startNode) {
+					if (startNode.adjacentNodes == null) {
+						startNode.adjacentNodes = new ArrayList<Node>();
+					}
+					startNode.adjacentNodes.add(node);
+				}
+			}
+		}
+	}
+
+	void printGraph() {
+		System.out.println(allNodes);
+	}
+}
+
+class Node {
+
+	String nodeName;
+	ArrayList<Node> adjacentNodes;
+
+	Node(String nodeName, ArrayList<Node> adjacentNodes) {
+		this.nodeName = nodeName;
+		this.adjacentNodes = adjacentNodes;
+	}
+
 }
