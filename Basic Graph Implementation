@@ -40,3 +40,20 @@ class Node {
 	}
 	
 }
+
+public class CreateGraph {
+
+	public static void main(String args[]){
+		Graph g = new Graph();
+		g.createNode("A");
+		g.createNode("B");
+		g.createNode("C");
+		g.createNode("D");
+
+		g.addEdge("A", "B");
+		g.addEdge("A", "C");
+		g.addEdge("A", "D");
+
+		g.printGraph();
+	}
+}
