@@ -36,6 +36,10 @@ public class Solution {
 		g.addEdge("G", "K");
 		g.addEdge("H", "L");
 		g.addEdge("J", "M");
+	  // mark all nodes to not visited
+	      for (Node node : g.allNodes) {
+		nodeVisited.put(node, false);
+	      }
 
  // System.out.println(bfsShortestDistance(g.getNode("K"), g.getNode("M"))); // to check if last/expected node is found or not.
  bfsShortestDistance(g.getNode("K"));
@@ -45,11 +49,6 @@ public class Solution {
 
 //Main BFS algo method, rest code is same as "Base Graph Implementation"
    static void bfsShortestDistance(Node startNode, Node endNode) {
-
-      // mark all nodes to not visited
-      for (Node node : g.allNodes) {
-        nodeVisited.put(node, false);
-      }
 
       Queue<Node> q = new ArrayDeque<Node>();
       q.add(startNode);
