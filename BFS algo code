@@ -1,0 +1,118 @@
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
+public class Solution {
+
+	public static void main(String args[]) {
+	Graph g = new Graph();
+		g.createNode("A");
+		g.createNode("B");
+		g.createNode("C");
+		g.createNode("D");
+		g.createNode("E");
+		g.createNode("F");
+		g.createNode("G");
+		g.createNode("H");
+		g.createNode("I");
+		g.createNode("J");
+		g.createNode("K");
+		g.createNode("L");
+		g.createNode("M");
+
+		g.addEdge("A", "B");
+		g.addEdge("A", "C");
+		g.addEdge("B", "D");
+		g.addEdge("B", "E");
+		g.addEdge("C", "F");
+		g.addEdge("C", "G");
+		g.addEdge("D", "H");
+		g.addEdge("D", "I");
+		g.addEdge("E", "J");
+		g.addEdge("G", "K");
+		g.addEdge("H", "L");
+		g.addEdge("J", "M");
+
+ // System.out.println(bfsShortestDistance(g.getNode("K"), g.getNode("M"))); // to check if last/expected node is found or not.
+ bfsShortestDistance(g.getNode("K"));
+	}
+
+  static Map<Node, Boolean> nodeVisited = new HashMap<Node, Boolean>();
+
+//Main BFS algo method, rest code is same as "Base Graph Implementation"
+   static void bfsShortestDistance(Node startNode, Node endNode) {
+
+      // mark all nodes to not visited
+      for (Node node : g.allNodes) {
+        nodeVisited.put(node, false);
+      }
+
+      Queue<Node> q = new ArrayDeque<Node>();
+      q.add(startNode);
+      nodeVisited.put(startNode, true);
+      System.out.println(startNode.nodeName);
+
+      while (q.size() > 0) {
+        Node polledNode = q.poll();
+        ArrayList<Node> adjacentNodes = polledNode.adjacentNodes;
+        for (Node n : adjacentNodes) {
+          if (!nodeVisited.get(n)) {
+            q.add(n);
+            nodeVisited.put(n, true);
+            System.out.println(n.nodeName);
+          }
+         /* if (n.nodeName.equalsIgnoreCase(endNode.nodeName)) {
+            return true;
+          }*/
+        }
+      }
+      //return false;
+    }
+
+}
+
+class Graph {
+
+	ArrayList<Node> allNodes = new ArrayList<Node>();
+
+	void createNode(String NodeName) {
+		allNodes.add(new Node(NodeName, null));
+	}
+
+	void addEdge(String startNodeName, String endNodeName) {
+		Node startNode = null;
+		for (Node node : allNodes) {
+			if (node.nodeName.equalsIgnoreCase(startNodeName)) {
+				startNode = node;
+			}
+			if (node.nodeName.equalsIgnoreCase(endNodeName)) {
+				if (null != startNode) {
+					if (startNode.adjacentNodes == null) {
+						startNode.adjacentNodes = new ArrayList<Node>();
+					}
+					startNode.adjacentNodes.add(node);
+				}
+			}
+		}
+	}
+
+	void printGraph() {
+		System.out.println(allNodes);
+	}
+}
+
+class Node {
+
+	String nodeName;
+	ArrayList<Node> adjacentNodes;
+
+	Node(String nodeName, ArrayList<Node> adjacentNodes) {
+		this.nodeName = nodeName;
+		this.adjacentNodes = adjacentNodes;
+	}
+
+}
